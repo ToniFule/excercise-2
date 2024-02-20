@@ -31,8 +31,8 @@ register.addEventListener("click",()=>{
       errorAll.innerText = "Please fill all of the fields";
       return;
     }
-  postForm()
-    console.log("test")
+    postForm()
+   
 
    })
 })
@@ -89,9 +89,33 @@ function createRegisterForm(){
 function postForm(){
     let firstName=document.getElementById("firstName").value;
     let lastName=document.getElementById("lastName").value;
-    let city=document.getElementById('city').value;
+    let city=document.getElementById("city").value;
     let email=document.getElementById("email").value;
     let job=document.getElementById("job").value;
     let password=document.getElementById("password").value
 
-}
+    const user={
+        firstname:firstName,
+        lastname:lastName,
+        city:city,
+        email:email,
+        job:job,
+        password:password,
+    }
+    console.log(user);
+    const postData = JSON.stringify(user);
+
+    fetch("https://65d38018522627d50109056a.mockapi.io/api/users", {
+      method: "POST",
+      body: postData,
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      if (response.ok) {
+        let form = document.getElementById("myForm");
+        form.reset();
+      }
+      return response.json();
+    });
+  }

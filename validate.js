@@ -53,7 +53,7 @@ function validateInput(input) {
 
 }
 
-let validation={};
+let validations={};
 
 function isValid() {
 
